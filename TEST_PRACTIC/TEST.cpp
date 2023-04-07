@@ -10,27 +10,27 @@
 #include <regex>
 
 using namespace std;
-string ABC = "абвгдежзийклмнопрстуфхцчшщъыьэюя";
+string ABC = "Р°Р±РІРіРґРµР¶Р·РёР№РєР»РјРЅРѕРїСЂСЃС‚СѓС„С…С†С‡С€С‰СЉС‹СЊСЌСЋСЏ";
 
 string Text() {
-	//string str1 = " Карл у Клары Украл корали ,Карла у Карлы украла кларнет  ";
+	//string str1 = " РљР°СЂР» Сѓ РљР»Р°СЂС‹ РЈРєСЂР°Р» РєРѕСЂР°Р»Рё ,РљР°СЂР»Р° Сѓ РљР°СЂР»С‹ СѓРєСЂР°Р»Р° РєР»Р°СЂРЅРµС‚  ";
 	string path = "..\\file2.txt";
 	ifstream fin;
 	fin.open(path);
 	string res = "";
 	if (!fin.is_open()) {
-		cout << "Ошибка вывода файла " << endl;
+		cout << "РћС€РёР±РєР° РІС‹РІРѕРґР° С„Р°Р№Р»Р° " << endl;
 	}
 	else
 	{
-		cout << "Файл открыт" << endl;
+		cout << "Р¤Р°Р№Р» РѕС‚РєСЂС‹С‚" << endl;
 		//char ch;
-		//fin.get(ch) выводит данные по символьно 
+		//fin.get(ch) РІС‹РІРѕРґРёС‚ РґР°РЅРЅС‹Рµ РїРѕ СЃРёРјРІРѕР»СЊРЅРѕ 
 
 		string str;
-		while (!fin.eof()) // отлвливает конец вайла 
+		while (!fin.eof()) // РѕС‚Р»РІР»РёРІР°РµС‚ РєРѕРЅРµС† РІР°Р№Р»Р° 
 		{
-			str = ""; //для корректного счетия	
+			str = ""; //РґР»СЏ РєРѕСЂСЂРµРєС‚РЅРѕРіРѕ СЃС‡РµС‚РёСЏ	
 			getline(fin, str);
 			res += str;
 		}
@@ -44,21 +44,21 @@ string Text() {
 }
 
 
-string filterWithoutSpace(string& text, string& ABC) { //метод фильтрации текста без пробелов 
+string filterWithoutSpace(string& text, string& ABC) { //РјРµС‚РѕРґ С„РёР»СЊС‚СЂР°С†РёРё С‚РµРєСЃС‚Р° Р±РµР· РїСЂРѕР±РµР»РѕРІ 
 
 	string filterText = "";
 	for (char c : text)
 	{
 		char v = tolower(c);
 
-		if (v == 'ё')v = 'е';//замена букв
+		if (v == 'С‘')v = 'Рµ';//Р·Р°РјРµРЅР° Р±СѓРєРІ
 
-		if (ABC.find(v) != string::npos)  //проверяет, является ли данный символ алфавитом или нет
+		if (ABC.find(v) != string::npos)  //РїСЂРѕРІРµСЂСЏРµС‚, СЏРІР»СЏРµС‚СЃСЏ Р»Рё РґР°РЅРЅС‹Р№ СЃРёРјРІРѕР» Р°Р»С„Р°РІРёС‚РѕРј РёР»Рё РЅРµС‚
 		{
 			filterText += v;
 		}
 		else if (isspace(v)) {
-			continue; //пропускаем пробелы 
+			continue; //РїСЂРѕРїСѓСЃРєР°РµРј РїСЂРѕР±РµР»С‹ 
 		}
 	}
 
@@ -68,20 +68,20 @@ string filterWithoutSpace(string& text, string& ABC) { //метод фильтрации текста
 string filterSpace(string& text, string& ABC) {
 	string filteredText = "";
 
-	regex pattern("\\s+");//для нахождения последовательности пробелов 
-	string result = regex_replace(text, pattern, " ");  // заміна на один пробіл
+	regex pattern("\\s+");//РґР»СЏ РЅР°С…РѕР¶РґРµРЅРёСЏ РїРѕСЃР»РµРґРѕРІР°С‚РµР»СЊРЅРѕСЃС‚Рё РїСЂРѕР±РµР»РѕРІ 
+	string result = regex_replace(text, pattern, " ");  // Р·Р°РјС–РЅР° РЅР° РѕРґРёРЅ РїСЂРѕР±С–Р»
 
 	for (char& c : result) {
 		char v = tolower(c);
 
-		if (v == 'ё')v = 'е';//замена букв
+		if (v == 'С‘')v = 'Рµ';//Р·Р°РјРµРЅР° Р±СѓРєРІ
 
-		if (ABC.find(v) != string::npos)  //проверяет, является ли данный символ алфавитом или нет
+		if (ABC.find(v) != string::npos)  //РїСЂРѕРІРµСЂСЏРµС‚, СЏРІР»СЏРµС‚СЃСЏ Р»Рё РґР°РЅРЅС‹Р№ СЃРёРјРІРѕР» Р°Р»С„Р°РІРёС‚РѕРј РёР»Рё РЅРµС‚
 		{
 			filteredText += v;
 		}
 		else if (isspace(v)) {
-			filteredText += ' '; //+ пробелы 
+			filteredText += ' '; //+ РїСЂРѕР±РµР»С‹ 
 		}
 	}
 	if (filteredText.back() == ' ') {
@@ -93,84 +93,84 @@ string filterSpace(string& text, string& ABC) {
 	return filteredText;
 }
 
-// функция получения кода символа
-int keycode(char s) {//проверка на соответствие символа ключа алфавиту 
+// С„СѓРЅРєС†РёСЏ РїРѕР»СѓС‡РµРЅРёСЏ РєРѕРґР° СЃРёРјРІРѕР»Р°
+int keycode(char s) {//РїСЂРѕРІРµСЂРєР° РЅР° СЃРѕРѕС‚РІРµС‚СЃС‚РІРёРµ СЃРёРјРІРѕР»Р° РєР»СЋС‡Р° Р°Р»С„Р°РІРёС‚Сѓ 
 	for (int i = 0; i < ABC.length(); i++) {
 		if (s == ABC[i]) return i;
 	}
 	return 0;
 }
 
-string Encode(string& text, string& key) {//функция для шифрования (принимает текст и ключ)
+string Encode(string& text, string& key) {//С„СѓРЅРєС†РёСЏ РґР»СЏ С€РёС„СЂРѕРІР°РЅРёСЏ (РїСЂРёРЅРёРјР°РµС‚ С‚РµРєСЃС‚ Рё РєР»СЋС‡)
 	string code;
 	char keyChar;
 	for (int i = 0; i < text.length(); i++) {
-		keyChar = keycode(key[i % key.length()]); //для цикличного перебора ключа по длине текста 
-		code += ABC[(keycode(text[i]) + keyChar) % ABC.length()];//заносит символ для получения строки 
+		keyChar = keycode(key[i % key.length()]); //РґР»СЏ С†РёРєР»РёС‡РЅРѕРіРѕ РїРµСЂРµР±РѕСЂР° РєР»СЋС‡Р° РїРѕ РґР»РёРЅРµ С‚РµРєСЃС‚Р° 
+		code += ABC[(keycode(text[i]) + keyChar) % ABC.length()];//Р·Р°РЅРѕСЃРёС‚ СЃРёРјРІРѕР» РґР»СЏ РїРѕР»СѓС‡РµРЅРёСЏ СЃС‚СЂРѕРєРё 
 	}
 	return code;
 }
 
-string Decode(string& text, string& key) { //функция разкодировки 
+string Decode(string& text, string& key) { //С„СѓРЅРєС†РёСЏ СЂР°Р·РєРѕРґРёСЂРѕРІРєРё 
 	string code;
-	for (int i = 0; i < text.length(); i++) {//цикл проходится по всем елементам текста 
-		code += ABC[(keycode(text[i]) - keycode(key[i % key.length()]) + ABC.length()) % ABC.length()];// берет значение зашифрованого символа - значение ключа 
+	for (int i = 0; i < text.length(); i++) {//С†РёРєР» РїСЂРѕС…РѕРґРёС‚СЃСЏ РїРѕ РІСЃРµРј РµР»РµРјРµРЅС‚Р°Рј С‚РµРєСЃС‚Р° 
+		code += ABC[(keycode(text[i]) - keycode(key[i % key.length()]) + ABC.length()) % ABC.length()];// Р±РµСЂРµС‚ Р·РЅР°С‡РµРЅРёРµ Р·Р°С€РёС„СЂРѕРІР°РЅРѕРіРѕ СЃРёРјРІРѕР»Р° - Р·РЅР°С‡РµРЅРёРµ РєР»СЋС‡Р° 
 	}
 	return code;
 }
 
-void bloc(string plaintext) { //метод для разбития текста на блоки для разшифровки с помошью unit
+void bloc(string plaintext) { //РјРµС‚РѕРґ РґР»СЏ СЂР°Р·Р±РёС‚РёСЏ С‚РµРєСЃС‚Р° РЅР° Р±Р»РѕРєРё РґР»СЏ СЂР°Р·С€РёС„СЂРѕРІРєРё СЃ РїРѕРјРѕС€СЊСЋ unit
 	
 	string g = "";
-	int r = 16; // длина ключа 
-	for (int j = 0 ; j < plaintext.size(); j += r) {//цикл для перебора символов в периоде ключа сдвига перебор от первого до элемента равного длине ключа 
-		g = plaintext.substr(j, r);//добавление к строке 
+	int r = 16; // РґР»РёРЅР° РєР»СЋС‡Р° 
+	for (int j = 0 ; j < plaintext.size(); j += r) {//С†РёРєР» РґР»СЏ РїРµСЂРµР±РѕСЂР° СЃРёРјРІРѕР»РѕРІ РІ РїРµСЂРёРѕРґРµ РєР»СЋС‡Р° СЃРґРІРёРіР° РїРµСЂРµР±РѕСЂ РѕС‚ РїРµСЂРІРѕРіРѕ РґРѕ СЌР»РµРјРµРЅС‚Р° СЂР°РІРЅРѕРіРѕ РґР»РёРЅРµ РєР»СЋС‡Р° 
+		g = plaintext.substr(j, r);//РґРѕР±Р°РІР»РµРЅРёРµ Рє СЃС‚СЂРѕРєРµ 
 		 cout<<g<<endl;
 	}
 	
 }
 
-//string ABC = "абвгдежзийклмнопрстуфхцчшщъыьэюя";
+//string ABC = "Р°Р±РІРіРґРµР¶Р·РёР№РєР»РјРЅРѕРїСЂСЃС‚СѓС„С…С†С‡С€С‰СЉС‹СЊСЌСЋСЏ";
 void Log() {
 	string text = Text(), key;
 
-	/*cout << "Введите ключ для шифрования :\t" ;
+	/*cout << "Р’РІРµРґРёС‚Рµ РєР»СЋС‡ РґР»СЏ С€РёС„СЂРѕРІР°РЅРёСЏ :\t" ;
 	cin >> key;*/
 
-	key = "декелисоборойдей";
-	//key = "делолисоборотней";
+	key = "РґРµРєРµР»РёСЃРѕР±РѕСЂРѕР№РґРµР№";
+	//key = "РґРµР»РѕР»РёСЃРѕР±РѕСЂРѕС‚РЅРµР№";
 	
 	cout<<key<<endl;
 
 
-	//string withoutSpace = filterWithoutSpace(text, ABC); //без них
-	//string withSpace = filterSpace(text, ABC);//  с пробелами
-	//cout << "\nВЫВОД ОТФИЛЬТРОВАНОГО ТЕКСТА \n" << endl;
+	//string withoutSpace = filterWithoutSpace(text, ABC); //Р±РµР· РЅРёС…
+	//string withSpace = filterSpace(text, ABC);//  СЃ РїСЂРѕР±РµР»Р°РјРё
+	//cout << "\nР’Р«Р’РћР” РћРўР¤РР›Р¬РўР РћР’РђРќРћР“Рћ РўР•РљРЎРўРђ \n" << endl;
 	//cout << withoutSpace << endl; 
-	//cout << "\nВЫВОД ЗАШИФРОВАНОГО ТЕКСТА\n" << endl;
+	//cout << "\nР’Р«Р’РћР” Р—РђРЁРР¤Р РћР’РђРќРћР“Рћ РўР•РљРЎРўРђ\n" << endl;
 	//cout << Encode(withoutSpace, key) << endl;
-	cout << "\nВЫВОД РОЗШИФРОВАНОГО ТЕКСТА\n" << endl;
+	cout << "\nР’Р«Р’РћР” Р РћР—РЁРР¤Р РћР’РђРќРћР“Рћ РўР•РљРЎРўРђ\n" << endl;
 	//cout << Decode(text, key) << endl;
 	bloc(Decode(text, key));
-	const int SIZE = 33; // размер таблицы
+	const int SIZE = 33; // СЂР°Р·РјРµСЂ С‚Р°Р±Р»РёС†С‹
 
 	
-		// Создаем двумерный массив для хранения таблицы
+		// РЎРѕР·РґР°РµРј РґРІСѓРјРµСЂРЅС‹Р№ РјР°СЃСЃРёРІ РґР»СЏ С…СЂР°РЅРµРЅРёСЏ С‚Р°Р±Р»РёС†С‹
 		char table[SIZE][SIZE];
 
-		// Заполняем первую строку таблицы алфавитом
+		// Р—Р°РїРѕР»РЅСЏРµРј РїРµСЂРІСѓСЋ СЃС‚СЂРѕРєСѓ С‚Р°Р±Р»РёС†С‹ Р°Р»С„Р°РІРёС‚РѕРј
 		for (int i = 0; i < SIZE; i++) {
-			table[0][i] = 'а' + i;
+			table[0][i] = 'Р°' + i;
 		}
 
-		// Заполняем остальные строки таблицы с учетом сдвига алфавита
+		// Р—Р°РїРѕР»РЅСЏРµРј РѕСЃС‚Р°Р»СЊРЅС‹Рµ СЃС‚СЂРѕРєРё С‚Р°Р±Р»РёС†С‹ СЃ СѓС‡РµС‚РѕРј СЃРґРІРёРіР° Р°Р»С„Р°РІРёС‚Р°
 		for (int i = 1; i < SIZE; i++) {
 			for (int j = 0; j < SIZE; j++) {
 				table[i][j] = table[i - 1][(j + 1) % SIZE];
 			}
 		}
 
-		// Выводим таблицу на экран
+		// Р’С‹РІРѕРґРёРј С‚Р°Р±Р»РёС†Сѓ РЅР° СЌРєСЂР°РЅ
 		for (int i = 0; i < SIZE; i++) {
 			for (int j = 0; j < SIZE; j++) {
 				cout << table[i][j] << " ";
